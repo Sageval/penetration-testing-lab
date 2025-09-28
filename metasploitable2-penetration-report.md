@@ -1,5 +1,4 @@
-**Author**: Valentine Imomoh  
-**Date**: September 2025  
+![Banner](images/Banner.png) 
 # Penetration Testing Report: Metasploitable2 Lab
 
 ## Table of Contents
@@ -426,5 +425,6 @@ The exercise reinforced key offensive security concepts:
 For defenders, this report serves as a reminder that default credentials, outdated software, and unmonitored system changes remain high-risk vulnerabilities. Regular audits, patching, and intrusion detection systems are essential to mitigate these threats.
 
 This lab not only demonstrates technical proficiency but also showcases the mindset and methodology of a professional penetration tester.
+
 
 
