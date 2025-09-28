@@ -84,7 +84,7 @@ medusa -h 192.168.56.101 -u msfadmin -P ~/Documents/custom.txt -M ssh
 
 ### 📸 Screenshot:
 
-<img src="Mendusa.png">
+![Medusa brute-force success](images/Mendusa.png)
 
 ### 🧠 Observations
 - The msfadmin account uses a default password, making it highly vulnerable.
@@ -144,7 +144,7 @@ hostname
 - Hostname: metasploitable
 
 ### 📸 Screenshot: Output of system info commands
-<img src="id current user.png">
+![Output info](images/id%20current%20user.png)
 
 #### 3. Checked Running Services and Network Info
 
@@ -159,7 +159,7 @@ netstat -tuln
 - Open ports: 21, 22, 23, 80, 3306, 139, 445...
 
 ### 📸 Screenshot: Output of netstat and ps aux
-<img src="Processes.png"> <img src="Ports.png">
+![Processes](images/Processes.PNG) ![Ports](images/Ports.PNG)
 
 #### 4. Listed Users and Groups
 
@@ -175,7 +175,7 @@ cat /etc/group
 - Groups: sudo, adm, users, nogroup
 
 ### 📸 Screenshot: System user account info and groups
-<img src="users.png"><img src="group.png">
+![Users](images/users.PNG) ![Group](images/group.PNG)
 
 #### 5. SUID Binaries(Privilege Escalation Leads)
 
@@ -189,7 +189,7 @@ find / -perm -4000 2>/dev/null
 - SUID binaries found: /usr/bin/passwd, /usr/bin/nmap, /bin/ping, etc.
 
 ### 📸 Screenshot: Output of SUID scan
-<img src="suid.PNG">
+![SUID](images/suid.PNG)
 
 ### 🧠 Observations
 - The system is running multiple vulnerable services.
@@ -251,7 +251,7 @@ whoami
 id
 ```
 ### 📸 Screenshot: Terminal showing root shell access
-<img src="escalate.PNG">
+![Escalate](images/escalate.PNG)
 
 ### 🧠 Observations
 - The presence of an outdated, SUID-enabled nmap binary is a critical vulnerability.
@@ -413,3 +413,4 @@ The exercise reinforced key offensive security concepts:
 For defenders, this report serves as a reminder that default credentials, outdated software, and unmonitored system changes remain high-risk vulnerabilities. Regular audits, patching, and intrusion detection systems are essential to mitigate these threats.
 
 This lab not only demonstrates technical proficiency but also showcases the mindset and methodology of a professional penetration tester.
+
