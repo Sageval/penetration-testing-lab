@@ -18,5 +18,5 @@ This repository contains a full attack chain simulation against Metasploitable2,
 **Date**: September 2025
 
 ## 📜 License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](License) for details.
 
