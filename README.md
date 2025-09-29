@@ -10,7 +10,7 @@ This repository contains a full attack chain simulation against Metasploitable2,
 - Data exfiltration using SCP and Netcat
 
 ## 📄 Files
-- `metasploitable2-penetration-report.md`: Full Markdown report
+- [`metasploitable2-penetration-report.md`](metasploitable2-penetration-report.md): Full Markdown report
 - `/images`: Screenshots and banner assets
 
 ## 🧠 Author
